@@ -34,17 +34,7 @@ def main():
         
         
             
-#    for k, row in df.iterrows():
-#        for key, value in row['value']:
-#            if type(value) == dict:
-#                for key0, value0 in value:
-#                    pass
-#            else:
-#                nc = len(value)
-#                
-#        mylist1 = [row['time'], row['value']['T'], row['value']['acc3']['14'],row['value']['acc3']['15']]
-#        datalist1.append(mylist1)
-    
+
     #print(datalist1[:1])
 #    print(data.values)
 #    rcfd.ODA_write_to_csv(folder_path = "D://Pywork//Pytest_1//Test files//")
