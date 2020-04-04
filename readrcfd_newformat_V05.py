@@ -35,11 +35,7 @@ def main():
         
             
 
-    #print(datalist1[:1])
-#    print(data.values)
-#    rcfd.ODA_write_to_csv(folder_path = "D://Pywork//Pytest_1//Test files//")
-#    print(data.keys())
-	# print(data["990"]["CH:0"])
+
 
 class Read_rcfd():
     def __init__(self, f):
