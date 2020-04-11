@@ -81,16 +81,6 @@ class Read_rcfd():
 
 
 
-    def write_to_csvs(self, folder_path = ""):
-        path1 = os.path.join(folder_path, self.savef)
-        if not os.path.exists(path1): os.makedirs(path1)
-        while self.start < self.filesize:
-            if (self.get_Block_header(self.start) == "5aa5") & (self.get_Block_header(self.start +2) == "0001"):
-                filename = self.get_filename()
-                csvfile = self.get_channel_data()
-                self.write_to_csv(csvfile, filename, folder_path)
-            else: self.start = self.get_next_block_position(self.start)	
-        self.start = 64
 
     def write_to_csv(self,csvfile, filename, folder_path = ""):
         df = pd.DataFrame(csvfile, columns = csvfile.keys())
@@ -110,6 +100,16 @@ class Read_rcfd():
             
         self.start = 64
         return rcfd_data_OD 
+    def write_to_csvs(self, folder_path = ""):
+        path1 = os.path.join(folder_path, self.savef)
+        if not os.path.exists(path1): os.makedirs(path1)
+        while self.start < self.filesize:
+            if (self.get_Block_header(self.start) == "5aa5") & (self.get_Block_header(self.start +2) == "0001"):
+                filename = self.get_filename()
+                csvfile = self.get_channel_data()
+                self.write_to_csv(csvfile, filename, folder_path)
+            else: self.start = self.get_next_block_position(self.start) 
+        self.start = 64
     
     def OD2_write_to_csv(self,folder_path = ""):
         #path1 = os.path.join(folder_path, 'OD2')
