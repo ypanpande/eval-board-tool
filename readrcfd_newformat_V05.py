@@ -121,12 +121,7 @@ class Read_rcfd():
         for key in dff.keys():
             dff[key].to_csv(os.path.join(folder_path, 'OD2_'+ key + '_' +self.savef + '.csv'), decimal = ',', sep = ';', index = False)
 
-    def get_all_data_OD2(self): # result is in dict, inside dict is DataFrame
-        df = self.get_all_data_OD2_raw()
-        dff = self.getdata_output_d2(df)
-        
-        return dff
-    
+
 # =============================================================================
 #   ODA block output
 # =============================================================================
