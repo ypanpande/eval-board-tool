@@ -134,11 +134,7 @@ class Read_rcfd():
                 #rcfd_data_A.extend(self.get_ODA_data())
                 rcfd_data_A = rcfd_data_A.append(self.get_ODA_data(), ignore_index = True)
 #                print(rcfd_data_A.shape)
-            else: 
-                self.start = self.get_next_block_position(self.start)
-                
-        self.start = 64
-        return rcfd_data_A
+
     
     def ODA_write_to_csv(self,folder_path = ""):
         path1 = os.path.join(folder_path, 'Acceleration')
