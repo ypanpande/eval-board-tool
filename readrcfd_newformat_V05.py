@@ -125,6 +125,13 @@ class Read_rcfd():
 # =============================================================================
 #   ODA block output
 # =============================================================================
+    def ODA_write_to_csv(self,folder_path = ""):
+        path1 = os.path.join(folder_path, 'Acceleration')
+        if not os.path.exists(path1): os.makedirs(path1)
+        #csvfile = self.get_all_data_ODA()
+        df = self.get_all_data_ODA()
+        #df = pd.DataFrame(csvfile, columns = ['time', 'ax', 'ay', 'az'])
+        df.to_csv(os.path.join(folder_path, 'Acceleration', 'Acc_'+ self.savef + '.csv'), decimal = ',', sep = ';', index = False)
         
 # get all the acceleration data in pd.DataFrame 
     def get_all_data_ODA(self):
@@ -136,13 +143,6 @@ class Read_rcfd():
 #                print(rcfd_data_A.shape)
 
     
-    def ODA_write_to_csv(self,folder_path = ""):
-        path1 = os.path.join(folder_path, 'Acceleration')
-        if not os.path.exists(path1): os.makedirs(path1)
-        #csvfile = self.get_all_data_ODA()
-        df = self.get_all_data_ODA()
-        #df = pd.DataFrame(csvfile, columns = ['time', 'ax', 'ay', 'az'])
-        df.to_csv(os.path.join(folder_path, 'Acceleration', 'Acc_'+ self.savef + '.csv'), decimal = ',', sep = ';', index = False)
 
 #==============================================================================
 #        ODT block output
