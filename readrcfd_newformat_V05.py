@@ -159,13 +159,6 @@ class Read_rcfd():
         self.start = 64
         return rcfd_data_T        
         
-    def ODT_write_to_csv(self, folder_path = ""):    
-        path1 = os.path.join(folder_path, 'Temperature')
-        if not os.path.exists(path1): os.makedirs(path1)
-#        csvfile = self.get_all_data_ODT()
-        df = self.get_all_data_ODT()
-#        df = pd.DataFrame(csvfile,columns = ['time', 'T1', 'T2', 'T3'])
-        df.to_csv(os.path.join(folder_path, 'Temperature', 'Tc_'+ self.savef + '.csv'), decimal = ',', sep = ';', index = False)
 
 
 # =============================================================================
