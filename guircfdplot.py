@@ -31,12 +31,7 @@ class GuiRcfdPlot:
         
         self.default_csv_file = " "
         
-        self.s = ttk.Style()
-        self.s.configure('TLabelframe.Label', font = 'arial 12 bold')
-        self.s.configure('TButton', font = 'Helvetica 10 bold')
-        self.init_GuiRcfd()
-        self.init_GuiPlot()
-        
+
       
     
     def init_GuiRcfd(self):
