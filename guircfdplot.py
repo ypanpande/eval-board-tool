@@ -26,14 +26,7 @@ class GuiRcfdPlot:
         self.root.title('Rcfd Convert and Plot Panel')	
         self.root.geometry("760x570+30+30") 	
         self.root.resizable(0,0)
-        self.default_source_file = " "
-        self.default_goal_path =" "	 
-        
-        self.default_csv_file = " "
-        
 
-      
-    
     def init_GuiRcfd(self):
         self.GuiRcfdFrame = ttk.LabelFrame(self.root, text = 'Rcfd to CSV Files:', width = 730, height = 300, relief = 'raised', borderwidth = 5)
         self.GuiRcfdFrame.place(x = 20, y = 10, width = 720, height = 290)
