@@ -56,8 +56,6 @@ class GuiRcfdPlot:
         self.lsourcecsv = ttk.Label(self.GuiPlotFrame, text = self.default_csv_file, wraplength = 575, background = "yellow")
         self.lsourcecsv.place(x = 120, y = 40, width = 580, height = 50)		
         
-        self.bplot = ttk.Button(self.GuiPlotFrame, text = "Plot", command = self.csv_plots)
-        self.bplot.place(x = 300, y = 120, width = 100, height = 50)
 
     def get_source_file(self):
         root = tk.Tk()
