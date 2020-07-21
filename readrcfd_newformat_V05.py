@@ -158,6 +158,10 @@ class Read_rcfd():
                 self.start = self.get_next_block_position(self.start)
         self.start = 64
         return rcfd_data_T        
+    def get_next_block_position(self, Block_at_FilePos = 64):
+       # start + header + ParameterLength + DataLength
+       return Block_at_FilePos + 10 + self.get_para(Block_at_FilePos + 6) + self.get_para(Block_at_FilePos + 8) 
+
         
 
 
@@ -180,10 +184,6 @@ class Read_rcfd():
         return channels
 
         
-    def get_next_block_position(self, Block_at_FilePos = 64):
-       # start + header + ParameterLength + DataLength
-       return Block_at_FilePos + 10 + self.get_para(Block_at_FilePos + 6) + self.get_para(Block_at_FilePos + 8)	
-
 
 # Blocktag:start 
 # BlockIdentifier: start + 2
