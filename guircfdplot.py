@@ -43,16 +43,7 @@ class GuiRcfdPlot:
         self.lgoal = ttk.Label(self.GuiRcfdFrame, text = self.default_goal_path,  wraplength = 575, background = "yellow")
         self.lgoal.place(x = 120, y = 120, width = 580, height = 50)	
         
-        self.bconvert = ttk.Button(self.GuiRcfdFrame, text = "Convert", command = self.file_convert)
-        self.bconvert.place(x = 300, y = 200, width = 100, height = 50)
-        bsourcecsv = ttk.Button(self.GuiPlotFrame, text = "CSV Files", command = self.get_csv_file)
-        bsourcecsv.place(x = 10, y = 40, width = 100, height = 50)      
-        
-        self.lsourcecsv = ttk.Label(self.GuiPlotFrame, text = self.default_csv_file, wraplength = 575, background = "yellow")
-        self.lsourcecsv.place(x = 120, y = 40, width = 580, height = 50)                
-    def init_GuiPlot(self):
-        self.GuiPlotFrame = ttk.LabelFrame(self.root, text = 'Plot CSV Files:', width = 730, height = 230, relief = 'raised', borderwidth = 5)
-        self.GuiPlotFrame.place(x = 20, y = 330, width = 720, height = 220)
+
         
 
         
