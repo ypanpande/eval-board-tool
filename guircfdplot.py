@@ -54,12 +54,6 @@ class GuiRcfdPlot:
         self.default_source_file = filedialog.askopenfilenames(initialdir = '/', title = 'Select rcfd files', filetypes = (('rcfd files', '*.rcfd'), ('All files', '*.*')))
         print('Rcfd files:', self.default_source_file)
         self.lsource['text'] = self.default_source_file
-        
-    def get_goal_path(self):
-        root = tk.Tk()
-        root.withdraw()
-        self.default_goal_path = filedialog.askdirectory()
-        self.lgoal['text'] = self.default_goal_path
 
     def file_convert(self):
         if len(self.default_source_file) == 1:
@@ -67,7 +61,13 @@ class GuiRcfdPlot:
         elif len(self.default_source_file) > 1:
             filename = ntpath.basename(self.default_source_file[0])[0: -5] + '_' + str(len(self.default_source_file)) + 'files'
 
-        dict_df = defaultdict(pd.DataFrame)
+        dict_df = defaultdict(pd.DataFrame)        
+    def get_goal_path(self):
+        root = tk.Tk()
+        root.withdraw()
+        self.default_goal_path = filedialog.askdirectory()
+        self.lgoal['text'] = self.default_goal_path
+
         for file in self.default_source_file:
             rcfd = Read_rcfd(file)
             rcfd_dict = rcfd.get_all_data_OD2()
