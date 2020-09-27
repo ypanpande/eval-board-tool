@@ -75,9 +75,7 @@ class GuiRcfdPlot:
                 dict_df[k] = dict_df[k].append(rcfd_dict[k])
         
         for key in dict_df.keys():
-            dict_df[key].to_csv(os.path.join(self.default_goal_path, 'OD2_'+ key + '_' + filename + '.csv'), decimal = ',', sep = ';', index = False)
-#        rcfd = Read_rcfd(self.default_source_file)
-#        rcfd.OD2_write_to_csv(self.default_goal_path)
+
         msg.showinfo(title = 'file convert finished', message = 'Chosen Rcfd file has been converted to csv files!')
     
     def get_csv_file(self):
