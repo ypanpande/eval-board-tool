@@ -44,7 +44,19 @@ class GuiRcfdPlot:
         self.lgoal.place(x = 120, y = 120, width = 580, height = 50)	
         
 
+    def get_goal_path(self):
+        root = tk.Tk()
+        root.withdraw()
+        self.default_goal_path = filedialog.askdirectory()
+        self.lgoal['text'] = self.default_goal_path
+
+        for file in self.default_source_file:
+            rcfd = Read_rcfd(file)
+            rcfd_dict = rcfd.get_all_data_OD2()
+            for k in rcfd_dict.keys():
+                dict_df[k] = dict_df[k].append(rcfd_dict[k])
         
+        for key in dict_df.keys():        
 
         
 
@@ -62,19 +74,7 @@ class GuiRcfdPlot:
             filename = ntpath.basename(self.default_source_file[0])[0: -5] + '_' + str(len(self.default_source_file)) + 'files'
 
         dict_df = defaultdict(pd.DataFrame)        
-    def get_goal_path(self):
-        root = tk.Tk()
-        root.withdraw()
-        self.default_goal_path = filedialog.askdirectory()
-        self.lgoal['text'] = self.default_goal_path
 
-        for file in self.default_source_file:
-            rcfd = Read_rcfd(file)
-            rcfd_dict = rcfd.get_all_data_OD2()
-            for k in rcfd_dict.keys():
-                dict_df[k] = dict_df[k].append(rcfd_dict[k])
-        
-        for key in dict_df.keys():
 
         msg.showinfo(title = 'file convert finished', message = 'Chosen Rcfd file has been converted to csv files!')
     
