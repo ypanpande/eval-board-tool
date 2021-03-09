@@ -1,7 +1,7 @@
 
 import tkinter as tk
 from tkinter import ttk, filedialog
-from readrcfd_newformat_V05 import Read_rcfd
+from readrcfd_V05_class import Read_rcfd
 from tkinter import messagebox as msg
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
@@ -26,7 +26,19 @@ class GuiRcfdPlot:
         self.root.title('Rcfd Convert and Plot Panel')	
         self.root.geometry("760x570+30+30") 	
         self.root.resizable(0,0)
-
+        self.default_source_file = " "
+        self.default_goal_path =" "	 
+        
+        self.default_csv_file = " "
+        
+        self.s = ttk.Style()
+        self.s.configure('TLabelframe.Label', font = 'arial 12 bold')
+        self.s.configure('TButton', font = 'Helvetica 10 bold')
+        self.init_GuiRcfd()
+        self.init_GuiPlot()
+        
+      
+    
     def init_GuiRcfd(self):
         self.GuiRcfdFrame = ttk.LabelFrame(self.root, text = 'Rcfd to CSV Files:', width = 730, height = 300, relief = 'raised', borderwidth = 5)
         self.GuiRcfdFrame.place(x = 20, y = 10, width = 720, height = 290)
@@ -43,22 +55,21 @@ class GuiRcfdPlot:
         self.lgoal = ttk.Label(self.GuiRcfdFrame, text = self.default_goal_path,  wraplength = 575, background = "yellow")
         self.lgoal.place(x = 120, y = 120, width = 580, height = 50)	
         
-
-    def get_goal_path(self):
-        root = tk.Tk()
-        root.withdraw()
-        self.default_goal_path = filedialog.askdirectory()
-        self.lgoal['text'] = self.default_goal_path
-
-        for file in self.default_source_file:
-            rcfd = Read_rcfd(file)
-            rcfd_dict = rcfd.get_all_data_OD2()
-            for k in rcfd_dict.keys():
-                dict_df[k] = dict_df[k].append(rcfd_dict[k])
+        self.bconvert = ttk.Button(self.GuiRcfdFrame, text = "Convert", command = self.file_convert)
+        self.bconvert.place(x = 300, y = 200, width = 100, height = 50)
         
-        for key in dict_df.keys():        
-
+    def init_GuiPlot(self):
+        self.GuiPlotFrame = ttk.LabelFrame(self.root, text = 'Plot CSV Files:', width = 730, height = 230, relief = 'raised', borderwidth = 5)
+        self.GuiPlotFrame.place(x = 20, y = 330, width = 720, height = 220)
         
+        bsourcecsv = ttk.Button(self.GuiPlotFrame, text = "CSV Files", command = self.get_csv_file)
+        bsourcecsv.place(x = 10, y = 40, width = 100, height = 50)		
+        
+        self.lsourcecsv = ttk.Label(self.GuiPlotFrame, text = self.default_csv_file, wraplength = 575, background = "yellow")
+        self.lsourcecsv.place(x = 120, y = 40, width = 580, height = 50)		
+        
+        self.bplot = ttk.Button(self.GuiPlotFrame, text = "Plot", command = self.csv_plots)
+        self.bplot.place(x = 300, y = 120, width = 100, height = 50)
 
     def get_source_file(self):
         root = tk.Tk()
@@ -66,6 +77,12 @@ class GuiRcfdPlot:
         self.default_source_file = filedialog.askopenfilenames(initialdir = '/', title = 'Select rcfd files', filetypes = (('rcfd files', '*.rcfd'), ('All files', '*.*')))
         print('Rcfd files:', self.default_source_file)
         self.lsource['text'] = self.default_source_file
+        
+    def get_goal_path(self):
+        root = tk.Tk()
+        root.withdraw()
+        self.default_goal_path = filedialog.askdirectory()
+        self.lgoal['text'] = self.default_goal_path
 
     def file_convert(self):
         if len(self.default_source_file) == 1:
@@ -73,9 +90,17 @@ class GuiRcfdPlot:
         elif len(self.default_source_file) > 1:
             filename = ntpath.basename(self.default_source_file[0])[0: -5] + '_' + str(len(self.default_source_file)) + 'files'
 
-        dict_df = defaultdict(pd.DataFrame)        
-
-
+        dict_df = defaultdict(pd.DataFrame)
+        for file in self.default_source_file:
+            rcfd = Read_rcfd(file)
+            rcfd_dict = rcfd.get_all_data_OD2()
+            for k in rcfd_dict.keys():
+                dict_df[k] = dict_df[k].append(rcfd_dict[k])
+        
+        for key in dict_df.keys():
+            dict_df[key].to_csv(os.path.join(self.default_goal_path, 'OD2_'+ key + '_' + filename + '.csv'), decimal = ',', sep = ';', index = False)
+#        rcfd = Read_rcfd(self.default_source_file)
+#        rcfd.OD2_write_to_csv(self.default_goal_path)
         msg.showinfo(title = 'file convert finished', message = 'Chosen Rcfd file has been converted to csv files!')
     
     def get_csv_file(self):
