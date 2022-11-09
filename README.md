@@ -9,7 +9,7 @@ Strain viewer is a software for visualize the lab collected strain data, in orde
 ### Screenshots
 
 <div align = "center">
-  <img align = "center" width = "400" src = "/assets/image1.jpg">
+  <img align = "center" width = "500" src = "/assets/image1.jpg">
 <p align = "center">Overview of tool</p> <br>
     <img align = "center" width = "600" src = "/assets/image2.jpg"/>
         <p align = "center"> Data process and visualizaiton</p><br>     
